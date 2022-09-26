@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# IDE0027: 使用访问器的表达式主体
+dotnet_diagnostic.IDE0027.severity = none

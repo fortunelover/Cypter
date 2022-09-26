@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>disable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
+    <PackageReference Include="Portable.BouncyCastle" Version="1.9.0" />
+  </ItemGroup>
+    <Target Name="RemoveDuplicateAnalyzers" BeforeTargets="CoreCompile">
+        <RemoveDuplicates Inputs="@(Analyzer)">
+            <Output TaskParameter="Filtered" ItemName="FilteredAnalyzer" />
+        </RemoveDuplicates>
+
+        <ItemGroup>
+            <Analyzer Remove="@(Analyzer)" />
+            <Analyzer Include="@(FilteredAnalyzer)" />
+        </ItemGroup>
+    </Target>
+</Project>
