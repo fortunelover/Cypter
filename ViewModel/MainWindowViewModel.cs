@@ -25,13 +25,14 @@ public class MainWindowViewModel : ObservableObject, IRecipient<string>
 
 
 
-    public void Init(int pageId)
+    public void Init(int pageId=2)
     {
         switch (pageId)
         {
-            case 1: FrameSource = new View.AsymmetricAlgorithmPage();break;
-            case 2: FrameSource = new View.SymmetricAlgorithmPage();break;
-            default: FrameSource = new View.SymmetricAlgorithmPage();break;
+            case 1: FrameSource = new View.AsymmetricAlgorithmPage(); break;
+            case 2: FrameSource = new View.SymmetricAlgorithmPage(); break;
+            case 3: FrameSource = new View.HashPage(); break;
+            default: FrameSource = new View.SymmetricAlgorithmPage(); break;
         }
     }
 
@@ -45,7 +46,7 @@ public class MainWindowViewModel : ObservableObject, IRecipient<string>
     public MainWindowViewModel()
     {
         WeakReferenceMessenger.Default.Register(this);
-        Init(2);
+        Init();
     }
 }
 
