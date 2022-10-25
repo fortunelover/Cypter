@@ -10,11 +10,12 @@
       Title="Page1">
     <Grid>
         <Menu Background="White" >
-            <Menu.DataContext>
+            <!--<Menu.DataContext>
                 <ViewModel:MenuViewModel/>
-            </Menu.DataContext>
-            <MenuItem Header="对称加密" Width="100"  BorderBrush="Black" Command="{Binding SelectPageCommand}" CommandParameter="1"/>
-            <MenuItem Header="非对称加密"  Width="100" BorderBrush="Black"  Command="{Binding SelectPageCommand}" CommandParameter="2"/>
+            </Menu.DataContext>-->
+            <MenuItem Header="对称加密(AES)"  Width="100" BorderBrush="Black"  Command="{Binding SelectPageCommand}" CommandParameter="2"/>
+            <MenuItem Header="非对称加密(RSA)" Width="100"  BorderBrush="Black" Command="{Binding SelectPageCommand}" CommandParameter="1"/>
+
             <MenuItem Header="非对称加密"  Width="100" BorderBrush="Black" />
         </Menu>
     </Grid>

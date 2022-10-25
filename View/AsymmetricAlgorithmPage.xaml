@@ -14,9 +14,9 @@
 
 
     <Grid>
-        <Grid.DataContext>
+        <!--<Grid.DataContext>
             <ViewModel:AsymmetricAlgorithmViewModel/>
-        </Grid.DataContext>
+        </Grid.DataContext>-->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -24,16 +24,16 @@
         <Grid Grid.Row="0">
             <StackPanel  Orientation="Horizontal">
                 <StackPanel Orientation="Vertical" Margin="10,0,0,0" >
-                    <Button Command="{Binding CreateKey}" Content="Create PublicKey And PrivateKey" HorizontalAlignment="Left" Margin="5,5" />
-                    <Button Command="{Binding CreateKeyByPriKey}" Content="Create PublicKey By PrivateKey" HorizontalAlignment="Left" Margin="5,5" />
+                    <Button Command="{Binding CreateKey}" Content="Create PublicKey And PrivateKey" HorizontalAlignment="Left" Margin="5,5" Width="280"/>
+                    <Button Command="{Binding CreateKeyByPriKey}" Content="Create PublicKey By PrivateKey" HorizontalAlignment="Left" Margin="5,5" Width="280"/>
                 </StackPanel>
-                <StackPanel Orientation="Vertical"  Margin="20,0,0,0">
-                    <Button Command="{Binding EncrytByPublicKey}" Content="EncrytByPublicKey" HorizontalAlignment="Left" Margin="5,5" />
-                    <Button Command="{Binding EncrytByPrivateKey}" Content="EncrytByPrivateKey" HorizontalAlignment="Left" Margin="5,5" />
+                <StackPanel Orientation="Vertical"  Margin="80,0,0,0">
+                    <Button Command="{Binding EncrytByPublicKey}" Content="EncrytByPublicKey" HorizontalAlignment="Left" Margin="5,5" Width="180"/>
+                    <Button Command="{Binding EncrytByPrivateKey}" Content="EncrytByPrivateKey" HorizontalAlignment="Left" Margin="5,5" Width="180"/>
                 </StackPanel>
-                <StackPanel Margin="10,0,0,0">
-                    <Button Command="{Binding DecrypByPublicKey}" Content="DecrypByPublicKey" HorizontalAlignment="Left" Margin="5,5" />
-                    <Button Command="{Binding DecrypByPrivateKey}" Content="DecrypByPrivateKey" HorizontalAlignment="Left" Margin="5,5"/>
+                <StackPanel Margin="20,0,0,0">
+                    <Button Command="{Binding DecrypByPublicKey}" Content="DecrypByPublicKey" HorizontalAlignment="Left" Margin="5,5" Width="180"/>
+                    <Button Command="{Binding DecrypByPrivateKey}" Content="DecrypByPrivateKey" HorizontalAlignment="Left" Margin="5,5" Width="180"/>
                 </StackPanel>
             </StackPanel>
         </Grid>

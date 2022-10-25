@@ -4,11 +4,133 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Cypter.View"
+      xmlns:ViewModel="clr-namespace:Cypter.ViewModel"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Page1">
 
     <Grid>
-        <TextBlock>Page2</TextBlock>
+        <!--<Grid.DataContext>
+            <ViewModel:SymmetricAlgorithmViewModel/>
+        </Grid.DataContext>-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <StackPanel  Orientation="Horizontal">
+                <Button Command="{Binding CreateKey}" Content="CreateKey" HorizontalAlignment="Left" Margin="5,5" />
+                <Button Command="{Binding Encryt}" Content="Encryt" HorizontalAlignment="Left" Margin="5,5" />
+                <Button Command="{Binding Decryp}" Content="Decryp" HorizontalAlignment="Left" Margin="5,5"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="1">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="0" Grid.Column="0">
+
+                    <TextBlock Text="Plaintext:"/>
+                    <Grid Height="Auto" Margin="15,15" >
+                        <Border Style="{StaticResource CycleBorder}">
+                            <TextBox Text="{Binding Plaintext, Mode=TwoWay}" Style="{StaticResource TextBox_A}"/>
+                        </Border>
+                    </Grid>
+
+                </Grid>
+                <Grid Grid.Row="0" Grid.Column="1">
+                    <TextBlock Text="Ciphertext:"/>
+                    <Grid Height="Auto" Margin="15,15" >
+                        <Border Style="{StaticResource CycleBorder}">
+                            <TextBox  Text="{Binding Ciphertext,Mode=TwoWay}" Style="{StaticResource TextBox_A}">
+                                <TextBox.Resources></TextBox.Resources>
+                            </TextBox>
+                        </Border>
+                    </Grid>
+                </Grid>
+
+
+            </Grid>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid>
+                    <Grid Margin="15,15">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <StackPanel>
+                                <TextBlock>CipherMode</TextBlock>
+                                <ComboBox BorderThickness="1"
+                                          Background="White"
+                                          Text="{Binding CipherModeStr,Mode=TwoWay}" 
+                                          Width="80" 
+                                          HorizontalAlignment="Left">
+                                    <ComboBoxItem Content="CBC" ></ComboBoxItem>
+                                    <ComboBoxItem Content="ECB" ></ComboBoxItem>
+                                    <ComboBoxItem Content="OFB" ></ComboBoxItem>
+                                    <ComboBoxItem Content="CFB" ></ComboBoxItem>
+                                    <ComboBoxItem Content="CTS" ></ComboBoxItem>
+                                </ComboBox>
+                            </StackPanel>
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <StackPanel>
+                                <TextBlock>PaddingMode</TextBlock>
+                                <ComboBox BorderThickness="1" 
+                                          Background="White" 
+                                          Text="{Binding PaddingModeStr,Mode=TwoWay}" 
+                                          Width="80" 
+                                          HorizontalAlignment="Left">
+                                    <ComboBoxItem Content="PKCS7" ></ComboBoxItem>
+                                    <ComboBoxItem Content="Zeros" ></ComboBoxItem>
+                                    <ComboBoxItem Content="None" ></ComboBoxItem>
+                                    <ComboBoxItem Content="ISO10126" ></ComboBoxItem>
+                                    <ComboBoxItem Content="ANSIX923" ></ComboBoxItem>
+                                </ComboBox>
+                                <TextBlock>EncordingMode</TextBlock>
+                                <ComboBox BorderThickness="1"
+                                          Background="White"
+                                          Text="{Binding EncordingModeStr,Mode=TwoWay}" 
+                                          Width="80" 
+                                          HorizontalAlignment="Left">
+                                    <ComboBoxItem Content="Base64" ></ComboBoxItem>
+                                    <ComboBoxItem Content="UTF-8" ></ComboBoxItem>
+                                </ComboBox>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Column="1">
+                    <TextBlock Text="Key"/>
+                    <Grid Height="Auto" Margin="15,15">
+                        <Border Style="{StaticResource CycleBorder}">
+                            <TextBox Text="{Binding Key,Mode=TwoWay}" Style="{StaticResource TextBox_A}"/>
+                        </Border>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <TextBlock Text="IV"/>
+                    <Grid Height="Auto" Margin="15,15">
+                        <Border Style="{StaticResource CycleBorder}">
+                            <TextBox Text="{Binding IV,Mode=TwoWay}" Style="{StaticResource TextBox_A}"/>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>

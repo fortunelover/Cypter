@@ -79,7 +79,7 @@ public class AsymmetricAlgorithmViewModel : ObservableObject
     {
         try
         {
-            DecrypData = RSAHelper.DecrypPub(PublicKey, EncrytData);
+            DecrypData = RSAHelper.DecrypPubBatch(PublicKey, EncrytData);
         }
         catch (Exception e)
         {
