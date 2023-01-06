@@ -3,15 +3,16 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Cypter.View"
+      xmlns:local="clr-namespace:Cypter.View" 
+      xmlns:ViewModel="clr-namespace:Cypter.ViewModel"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="HashPage">
 
     <Grid>
-        <!--<Grid.DataContext>
-            <ViewModel:AsymmetricAlgorithmViewModel/>
-        </Grid.DataContext>-->
+        <Grid.DataContext>
+            <ViewModel:HashViewModel/>
+        </Grid.DataContext>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -25,9 +26,12 @@
                                           Width="80" 
                                           HorizontalAlignment="Left">
                     <ComboBoxItem Content="MD5" ></ComboBoxItem>
-                    <ComboBoxItem Content="SHA" ></ComboBoxItem>
+                    <ComboBoxItem Content="SHA1" ></ComboBoxItem>
+                    <ComboBoxItem Content="SHA256" ></ComboBoxItem>
                     <ComboBoxItem Content="SM3" ></ComboBoxItem>
+                    
                 </ComboBox>
+                <Button Margin="10,0,0,0" Content="EXE" Command="{Binding exe}"></Button>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1">
