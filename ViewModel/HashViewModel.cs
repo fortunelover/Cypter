@@ -11,7 +11,7 @@ using Cypter.Helper;
 
 namespace Cypter.ViewModel
 {
-    public class HashViewModel: ObservableObject
+    public class HashViewModel : ObservableObject
     {
         private string _cipherModeStr;
 
@@ -38,33 +38,67 @@ namespace Cypter.ViewModel
             set => SetProperty(ref _destination, value);
         }
 
+        Func<string, string> func = null;
 
         public ICommand exe => new RelayCommand(() =>
         {
             try
             {
+                GetHash getHash = null;
                 switch (CipherModeStr)
                 {
                     case "MD5":
-                        Destination = HashHelper.GetMD5(Source);
+                        getHash = HashHelper.GetMD5;
                         break;
                     case "SHA1":
-                        Destination = HashHelper.GetSHA1(Source);
+                        getHash = HashHelper.GetSHA1;
                         break;
                     case "SM3":
-                        Destination = HashHelper.GetSM3(Source);
+                        getHash = HashHelper.GetSM3;
                         break;
                     case "SHA256":
-                        Destination = HashHelper.GetSHA256(Source);
+                        getHash = HashHelper.GetSHA256;
                         break;
                     default:
+                        getHash = null;
                         break;
                 }
+                if (getHash != null)
+                {
+                    Destination = getHash.Invoke(Source);
+                }
+
+                //switch (CipherModeStr)
+                //{
+                //    case "MD5":
+                //        func = new Func<string, string>(HashHelper.GetMD5);
+                //        break;
+                //    case "SHA1":
+                //        func = new Func<string, string>(HashHelper.GetSHA1);
+                //        break;
+                //    case "SM3":
+                //        func = new Func<string, string>(HashHelper.GetSM3);
+                //        break;
+                //    case "SHA256":
+                //        func = new Func<string, string>(HashHelper.GetSHA256);
+                //        break;
+                //    default:
+                //        func = null;
+                //        break;
+                //}
+                //if (func != null)
+                //{
+                //    Destination = func(Source);
+                //}
             }
             catch (Exception e)
             {
                 Destination = "Error!\n" + e.Message;
             }
         });
+
+
     }
+
+    public delegate string GetHash(string source);
 }
