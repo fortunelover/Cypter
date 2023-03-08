@@ -1,14 +1,15 @@
 ﻿<Page
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Cypter.View"
-      xmlns:ViewModel="clr-namespace:Cypter.ViewModel"
-      x:Class="Cypter.View.AsymmetricAlgorithmPage"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="Page1">
+    x:Class="Cypter.View.AsymmetricAlgorithmPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ViewModel="clr-namespace:Cypter.ViewModel"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Cypter.View"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Page1"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
 
 
 
@@ -18,67 +19,168 @@
             <ViewModel:AsymmetricAlgorithmViewModel/>
         </Grid.DataContext>-->
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <StackPanel  Orientation="Horizontal">
-                <StackPanel Orientation="Vertical" Margin="10,0,0,0" >
-                    <Button Command="{Binding CreateKey}" Content="Create PublicKey And PrivateKey" HorizontalAlignment="Left" Margin="5,5" Width="280"/>
-                    <Button Command="{Binding CreateKeyByPriKey}" Content="Create PublicKey By PrivateKey" HorizontalAlignment="Left" Margin="5,5" Width="280"/>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Margin="10,0,0,0" Orientation="Vertical">
+                    <Button
+                        Width="180"
+                        Margin="5,5"
+                        HorizontalAlignment="Left"
+                        Command="{Binding CreateKey}"
+                        Content="生成新的公私钥" />
+                    <Button
+                        Width="180"
+                        Margin="5,5"
+                        HorizontalAlignment="Left"
+                        Command="{Binding CreateKeyByPriKey}"
+                        Content="根据私钥生成公钥" />
                 </StackPanel>
-                <StackPanel Orientation="Vertical"  Margin="80,0,0,0">
-                    <Button Command="{Binding EncrytByPublicKey}" Content="EncrytByPublicKey" HorizontalAlignment="Left" Margin="5,5" Width="180"/>
-                    <Button Command="{Binding EncrytByPrivateKey}" Content="EncrytByPrivateKey" HorizontalAlignment="Left" Margin="5,5" Width="180"/>
+                <StackPanel Margin="20,0,0,0" Orientation="Vertical">
+                    <Button
+                        Width="180"
+                        Margin="5,5"
+                        HorizontalAlignment="Left"
+                        Command="{Binding EncrytByPublicKey}"
+                        Content="公钥加密" />
+                    <Button
+                        Width="180"
+                        Margin="5,5"
+                        HorizontalAlignment="Left"
+                        Command="{Binding EncrytByPrivateKey}"
+                        Content="私钥加密" />
                 </StackPanel>
                 <StackPanel Margin="20,0,0,0">
-                    <Button Command="{Binding DecrypByPublicKey}" Content="DecrypByPublicKey" HorizontalAlignment="Left" Margin="5,5" Width="180"/>
-                    <Button Command="{Binding DecrypByPrivateKey}" Content="DecrypByPrivateKey" HorizontalAlignment="Left" Margin="5,5" Width="180"/>
+                    <Button
+                        Width="180"
+                        Margin="5,5"
+                        HorizontalAlignment="Left"
+                        Command="{Binding DecrypByPublicKey}"
+                        Content="公钥解密" />
+                    <Button
+                        Width="180"
+                        Margin="5,5"
+                        HorizontalAlignment="Left"
+                        Command="{Binding DecrypByPrivateKey}"
+                        Content="私钥解密" />
+                </StackPanel>
+                <StackPanel Margin="20,0,0,0">
+                    <Button
+                        Width="180"
+                        Margin="5,5"
+                        HorizontalAlignment="Left"
+                        Command="{Binding SignData}"
+                        Content="签名" />
+                    <Button
+                        Width="180"
+                        Margin="5,5"
+                        HorizontalAlignment="Left"
+                        Command="{Binding VerifyData}"
+                        Content="验签" />
+                </StackPanel>
+                <StackPanel Margin="20,0,0,0">
+                    <Button
+                        Width="180"
+                        Margin="5,5"
+                        HorizontalAlignment="Left"
+                        Command="{Binding Java2Net}"
+                        Content="Java私钥转Net" />
+                    <Button
+                        Width="180"
+                        Margin="5,5"
+                        HorizontalAlignment="Left"
+                        Command="{Binding Net2Java}"
+                        Content="Net私钥转Java" />
                 </StackPanel>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0" Grid.Column="0">
-                <TextBlock Text="PublicKey:"/>
-                <Grid Height="Auto" Margin="15,15" >
+                <TextBlock Text="公钥:" />
+                <Grid Height="Auto" Margin="15,15">
                     <Border Style="{StaticResource CycleBorder}">
-                        <TextBox Text="{Binding PublicKey, Mode=TwoWay}" Style="{StaticResource TextBox_A}"/>
+                        <TextBox Style="{StaticResource TextBox_A}" Text="{Binding PublicKey, Mode=TwoWay}" />
                     </Border>
                 </Grid>
 
             </Grid>
             <Grid Grid.Row="0" Grid.Column="1">
-                <TextBlock Text="EncrytData:"/>
-                <Grid Height="Auto" Margin="15,15" >
+                <TextBlock Text="加密数据:" />
+                <Grid Height="Auto" Margin="15,15">
                     <Border Style="{StaticResource CycleBorder}">
-                        <TextBox  Text="{Binding EncrytData,Mode=TwoWay}" Style="{StaticResource TextBox_A}">
-                            <TextBox.Resources></TextBox.Resources>
+                        <TextBox Style="{StaticResource TextBox_A}" Text="{Binding EncrytData, Mode=TwoWay}">
+                            <TextBox.Resources />
                         </TextBox>
                     </Border>
                 </Grid>
             </Grid>
-            <Grid Grid.Row="1" Grid.Column="0">
-                <TextBlock Text="PrivateKey:"/>
+
+            <Grid Grid.Row="0" Grid.Column="2">
+                <TextBlock Text="签名:" />
                 <Grid Height="Auto" Margin="15,15">
                     <Border Style="{StaticResource CycleBorder}">
-                        <TextBox Text="{Binding PrivateKey,Mode=TwoWay}" Style="{StaticResource TextBox_A}"/>
+                        <TextBox Style="{StaticResource TextBox_A}" Text="{Binding SignText, Mode=TwoWay}">
+                            <TextBox.Resources />
+                        </TextBox>
+                    </Border>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Row="0" Grid.Column="3">
+                <TextBlock Text="错误:" />
+                <Grid Height="Auto" Margin="15,15">
+                    <Border Style="{StaticResource CycleBorder}">
+                        <TextBox Style="{StaticResource TextBox_A}" Text="{Binding ErrorText, Mode=TwoWay}">
+                            <TextBox.Resources />
+                        </TextBox>
+                    </Border>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Row="1" Grid.Column="0">
+                <TextBlock Text="私钥:" />
+                <Grid Height="Auto" Margin="15,15">
+                    <Border Style="{StaticResource CycleBorder}">
+                        <TextBox Style="{StaticResource TextBox_A}" Text="{Binding PrivateKey, Mode=TwoWay}" />
                     </Border>
                 </Grid>
             </Grid>
             <Grid Grid.Row="1" Grid.Column="1">
-                <TextBlock Text="DecrypData:"/>
+                <TextBlock Text="解密数据:" />
                 <Grid Height="Auto" Margin="15,15">
                     <Border Style="{StaticResource CycleBorder}">
-                        <TextBox Text="{Binding DecrypData,Mode=TwoWay}" Style="{StaticResource TextBox_A}"/>
+                        <TextBox Style="{StaticResource TextBox_A}" Text="{Binding DecrypData, Mode=TwoWay}" />
+                    </Border>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Row="1" Grid.Column="2">
+                <TextBlock Text="输出:" />
+                <Grid Height="Auto" Margin="15,15">
+                    <Border Style="{StaticResource CycleBorder}">
+                        <TextBox Style="{StaticResource TextBox_A}" Text="{Binding Output, Mode=TwoWay}" />
+                    </Border>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Row="1" Grid.Column="3">
+                <TextBlock Text="输入:" />
+                <Grid Height="Auto" Margin="15,15">
+                    <Border Style="{StaticResource CycleBorder}">
+                        <TextBox Style="{StaticResource TextBox_A}" Text="{Binding Input, Mode=TwoWay}" />
                     </Border>
                 </Grid>
             </Grid>

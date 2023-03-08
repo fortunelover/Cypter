@@ -11,6 +11,34 @@ using System.Windows.Input;
 namespace Cypter.ViewModel;
 public class AsymmetricAlgorithmViewModel : ObservableObject
 {
+    private string _output;
+    public string Output
+    {
+        get => _output;
+        set => SetProperty(ref _output, value);
+    }
+
+    private string _input;
+    public string Input
+    {
+        get => _input;
+        set => SetProperty(ref _input, value);
+    }
+
+    private string _signtext;
+    public string SignText
+    {
+        get => _signtext;
+        set => SetProperty(ref _signtext, value);
+    }
+
+    private string _errorText;
+    public string ErrorText
+    {
+        get => _errorText;
+        set => SetProperty(ref _errorText, value);
+    }
+
     private string _strPri;
     public string PrivateKey
     {
@@ -51,11 +79,13 @@ public class AsymmetricAlgorithmViewModel : ObservableObject
     {
         try
         {
-            EncrytData = RSAHelper.EncrytPub(PublicKey, DecrypData);
+            EncrytData = RSAHelper.EncrytPub(PublicKey, Input);
+            Output= string.Empty;
+            ErrorText = string.Empty;
         }
         catch (Exception e)
         {
-            EncrytData = "Error!\n" + e.Message;
+            ErrorText = "Error!\n" + e.Message;
         }
     });
 
@@ -65,11 +95,12 @@ public class AsymmetricAlgorithmViewModel : ObservableObject
     {
         try
         {
-            EncrytData = RSAHelper.EncrytPriBatch(PrivateKey, DecrypData);
+            EncrytData = RSAHelper.EncrytPriBatch(PrivateKey, Input);
+            ErrorText = string.Empty;
         }
         catch (Exception e)
         {
-            EncrytData = "Error!\n" + e.Message;
+            ErrorText = "Error!\n" + e.Message;
         }
     });
 
@@ -80,10 +111,11 @@ public class AsymmetricAlgorithmViewModel : ObservableObject
         try
         {
             DecrypData = RSAHelper.DecrypPubBatch(PublicKey, EncrytData);
+            ErrorText = string.Empty;
         }
         catch (Exception e)
         {
-            DecrypData = "Error!\n" + e.Message;
+            ErrorText = "Error!\n" + e.Message;
         }
     });
 
@@ -93,10 +125,11 @@ public class AsymmetricAlgorithmViewModel : ObservableObject
         try
         {
             DecrypData = RSAHelper.DecrypPri(PrivateKey, EncrytData);
+            ErrorText = string.Empty;
         }
         catch (Exception e)
         {
-            DecrypData = "Error!\n" + e.Message;
+            ErrorText = "Error!\n" + e.Message;
         }
     });
 
@@ -105,11 +138,68 @@ public class AsymmetricAlgorithmViewModel : ObservableObject
         try
         {
             PublicKey = RSAHelper.CreatePubKeyByPriKey(PrivateKey);
+            ErrorText = string.Empty;
         }
         catch (Exception e)
         {
-            DecrypData = "Error!\n" + e.Message;
+            ErrorText = "Error!\n" + e.Message;
         }
     });
-    
+
+
+
+    public ICommand Java2Net => new RelayCommand(() =>
+    {
+        try
+        {
+            PrivateKey = RSAHelper.RSAPrivateKeyJava2DotNet(PrivateKey);
+            ErrorText = string.Empty;
+        }
+        catch (Exception e)
+        {
+            ErrorText = "Error!\n" + e.Message;
+        }
+    });
+
+    public ICommand Net2Java => new RelayCommand(() =>
+    {
+        try
+        {
+            PrivateKey = RSAHelper.RSAPrivateKeyDotNet2Java(PrivateKey);
+            ErrorText = string.Empty;
+        }
+        catch (Exception e)
+        {
+            ErrorText = "Error!\n" + e.Message;
+        }
+    });
+
+    public ICommand SignData => new RelayCommand(() =>
+    {
+        try
+        {
+            this.SignText = RSAHelper.SignData(Input, PrivateKey);
+            Output = "签名成功";
+            ErrorText = string.Empty;
+        }
+        catch (Exception e)
+        {
+            ErrorText = "Error!\n" + e.Message;
+        }
+    });
+
+    public ICommand VerifyData => new RelayCommand(() =>
+    {
+        try
+        {
+            Output = RSAHelper.VerifyData(Input, PublicKey,SignText)?"验签成功": "验签失败";
+            ErrorText = string.Empty;
+        }
+        catch (Exception e)
+        {
+            ErrorText = "Error!\n" + e.Message;
+        }
+    }); 
+
+
 }
